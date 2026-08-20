@@ -47,13 +47,12 @@ p {
 /* =========================================================
    MASTER WIDTH
 
-   THIS IS THE IMPORTANT PART.
-
-   Every major part of the site uses this exact container.
+   Everything uses this same page grid.
 ========================================================= */
 
 .container {
   width: min(1240px, calc(100% - 64px));
+
   margin-left: auto;
   margin-right: auto;
 }
@@ -64,18 +63,24 @@ p {
 ========================================================= */
 
 .site-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 100;
+
   background: rgba(255, 255, 255, 0.96);
+
   border-bottom: 1px solid #e8eaed;
 
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  backdrop-filter: blur(12px);
 }
 
 .main-nav {
   min-height: 78px;
 
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -84,7 +89,9 @@ p {
 
 .nav-brand {
   font-size: 0.88rem;
+
   font-weight: 800;
+
   letter-spacing: 0.08em;
 
   text-decoration: none;
@@ -94,6 +101,7 @@ p {
 
 .nav-links {
   display: flex;
+
   align-items: center;
 
   gap: 28px;
@@ -101,6 +109,7 @@ p {
 
 .nav-links a {
   font-size: 0.95rem;
+
   font-weight: 500;
 
   color: #343943;
@@ -129,9 +138,11 @@ p {
   min-height: 350px;
 
   position: relative;
+
   overflow: hidden;
 
   display: flex;
+
   align-items: flex-end;
 
   padding: 54px;
@@ -144,16 +155,19 @@ p {
       rgba(67, 54, 255, 0.85),
       transparent 30%
     ),
+
     radial-gradient(
       circle at 82% 80%,
       rgba(236, 29, 152, 0.65),
       transparent 34%
     ),
+
     radial-gradient(
       circle at 35% 90%,
       rgba(0, 168, 255, 0.55),
       transparent 42%
     ),
+
     linear-gradient(
       120deg,
       #05070d 0%,
@@ -167,7 +181,7 @@ p {
 }
 
 
-/* abstract light lines */
+/* abstract hero lines */
 
 .hero-decoration {
   position: absolute;
@@ -188,7 +202,8 @@ p {
   right: -150px;
   top: 40px;
 
-  border-top: 4px solid rgba(69, 169, 255, 0.8);
+  border-top:
+    4px solid rgba(69, 169, 255, 0.8);
 
   transform: rotate(-8deg);
 }
@@ -200,7 +215,8 @@ p {
   right: -180px;
   top: 90px;
 
-  border-top: 5px solid rgba(219, 51, 255, 0.72);
+  border-top:
+    5px solid rgba(219, 51, 255, 0.72);
 
   transform: rotate(-11deg);
 }
@@ -212,11 +228,11 @@ p {
   right: -130px;
   top: 150px;
 
-  border-top: 3px solid rgba(255, 88, 103, 0.65);
+  border-top:
+    3px solid rgba(255, 88, 103, 0.65);
 
   transform: rotate(-9deg);
 }
-
 
 .hero-content {
   max-width: 920px;
@@ -226,6 +242,7 @@ p {
   margin-bottom: 14px;
 
   font-size: 0.78rem;
+
   font-weight: 700;
 
   letter-spacing: 0.13em;
@@ -236,7 +253,8 @@ p {
 .hero h1 {
   margin: 0;
 
-  font-size: clamp(2.6rem, 5vw, 4.6rem);
+  font-size:
+    clamp(2.6rem, 5vw, 4.6rem);
 
   line-height: 0.98;
 
@@ -256,18 +274,20 @@ p {
 
   margin: 30px 0 0;
 
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-size:
+    clamp(1.15rem, 2vw, 1.45rem);
 
   line-height: 1.5;
 
   font-style: italic;
 
-  color: rgba(255, 255, 255, 0.9);
+  color:
+    rgba(255, 255, 255, 0.9);
 }
 
 
 /* =========================================================
-   STATS
+   CAREER STATS
 ========================================================= */
 
 .stats-section {
@@ -277,7 +297,8 @@ p {
 .stats-grid {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns:
+    repeat(4, 1fr);
 
   gap: 28px;
 }
@@ -291,7 +312,8 @@ p {
 
   margin-bottom: 4px;
 
-  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-size:
+    clamp(1.25rem, 2vw, 1.7rem);
 
   line-height: 1;
 
@@ -328,7 +350,7 @@ p {
 }
 
 
-/* subtle edge fades */
+/* edge fades */
 
 .logo-marquee::before,
 .logo-marquee::after {
@@ -370,11 +392,13 @@ p {
 
 .logo-track {
   display: flex;
+
   align-items: center;
 
   width: max-content;
 
-  animation: logo-scroll 38s linear infinite;
+  animation:
+    logo-scroll 38s linear infinite;
 }
 
 .logo-marquee:hover .logo-track {
@@ -390,12 +414,14 @@ p {
   margin-right: 42px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 }
 
 .logo-item.logo-wide {
   width: 210px;
+
   flex-basis: 210px;
 }
 
@@ -438,6 +464,7 @@ p {
   margin: 0 0 16px;
 
   font-size: 0.82rem;
+
   font-weight: 750;
 
   letter-spacing: 0.13em;
@@ -448,7 +475,8 @@ p {
 .case-title {
   margin: 0;
 
-  font-size: clamp(2.7rem, 5vw, 4.8rem);
+  font-size:
+    clamp(2.7rem, 5vw, 4.8rem);
 
   line-height: 1;
 
@@ -460,7 +488,8 @@ p {
 
   margin: 18px 0 8px;
 
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-size:
+    clamp(1.4rem, 2.5vw, 2rem);
 
   line-height: 1.3;
 
@@ -479,23 +508,149 @@ p {
 
 
 /* =========================================================
-   AT A GLANCE
+   PROGRAM CONTEXT
 ========================================================= */
+
+.program-scale {
+  margin-top: 68px;
+
+  padding: 48px 0 8px;
+
+  border-top: 1px solid #dfe3e8;
+}
+
+.program-label,
+.work-scale-label {
+  margin: 0 0 16px;
+
+  font-size: 0.78rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.13em;
+
+  color: #1479d1;
+}
+
+.program-scale h3 {
+  max-width: 950px;
+
+  margin: 0 0 20px;
+
+  font-size:
+    clamp(2.2rem, 4vw, 3.6rem);
+
+  line-height: 1.05;
+
+  letter-spacing: -0.045em;
+
+  color: #171a22;
+}
+
+.program-scale-intro {
+  max-width: 900px;
+
+  margin-bottom: 44px;
+
+  font-size: 1.18rem;
+
+  line-height: 1.65;
+
+  color: #4b515b;
+}
+
+
+/* =========================================================
+   PROGRAM SCALE NUMBERS
+========================================================= */
+
+.scale-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  border-top:
+    1px solid #dfe3e8;
+
+  border-bottom:
+    1px solid #dfe3e8;
+}
+
+.scale-stat {
+  min-height: 155px;
+
+  padding:
+    30px 28px 30px 0;
+}
+
+.scale-stat + .scale-stat {
+  padding-left: 28px;
+
+  border-left:
+    1px solid #dfe3e8;
+}
+
+.scale-number {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size:
+    clamp(2.2rem, 3.5vw, 3.4rem);
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+
+  color: #171a22;
+}
+
+.scale-label {
+  display: block;
+
+  font-size: 0.95rem;
+
+  line-height: 1.45;
+
+  color: #4f5660;
+}
+
+.scale-source {
+  max-width: 900px;
+
+  margin: 15px 0 0;
+
+  font-size: 0.76rem;
+
+  line-height: 1.5;
+
+  color: #7c838d;
+}
+
+
+/* =========================================================
+   MY WORK — AT A GLANCE
+========================================================= */
+
+.work-scale {
+  margin-top: 72px;
+}
 
 .at-a-glance {
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns:
+    repeat(4, 1fr);
 
   gap: 22px;
-
-  margin-top: 55px;
 }
 
 .glance-item {
   padding: 24px 0;
 
-  border-top: 1px solid #dfe3e8;
+  border-top:
+    1px solid #dfe3e8;
 }
 
 .glance-item strong {
@@ -530,7 +685,8 @@ p {
 .case-contents {
   margin-top: 64px;
 
-  padding: 38px 48px 50px;
+  padding:
+    38px 48px 50px;
 
   border-radius: 8px;
 
@@ -541,6 +697,7 @@ p {
   margin: 0 0 20px;
 
   font-size: 0.78rem;
+
   font-weight: 750;
 
   letter-spacing: 0.13em;
@@ -551,7 +708,8 @@ p {
 .contents-grid {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns:
+    repeat(2, 1fr);
 
   column-gap: 64px;
 }
@@ -561,17 +719,20 @@ p {
 
   display: grid;
 
-  grid-template-columns: 36px 1fr;
+  grid-template-columns:
+    36px 1fr;
 
   align-items: center;
 
   gap: 14px;
 
-  border-bottom: 1px solid #dde1e6;
+  border-bottom:
+    1px solid #dde1e6;
 
   text-decoration: none;
 
   font-size: 1rem;
+
   font-weight: 650;
 
   color: #343943;
@@ -597,20 +758,20 @@ p {
 
 
 /* =========================================================
-   ALL CASE STUDY SECTIONS
+   CASE STUDY SECTIONS
 
-   NOTE:
-   NO DIFFERENT WIDTH HERE.
-
-   The .container controls alignment.
+   All use the same .container width.
 ========================================================= */
 
 .case-section {
   padding: 0 0 110px;
+
+  scroll-margin-top: 100px;
 }
 
 .section-divider {
   width: 100%;
+
   height: 1px;
 
   margin-bottom: 88px;
@@ -622,6 +783,7 @@ p {
   margin: 0 0 8px;
 
   font-size: 0.8rem;
+
   font-weight: 750;
 
   letter-spacing: 0.12em;
@@ -630,17 +792,12 @@ p {
 }
 
 .section-title {
-  /*
-     Text is allowed to be readable,
-     but its LEFT EDGE remains aligned
-     with the master container.
-  */
-
   max-width: 1080px;
 
   margin: 0 0 30px;
 
-  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  font-size:
+    clamp(2.8rem, 5vw, 4.8rem);
 
   line-height: 1.03;
 
@@ -656,7 +813,8 @@ p {
 
   margin: 0;
 
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-size:
+    clamp(1.25rem, 2vw, 1.65rem);
 
   line-height: 1.55;
 
@@ -709,6 +867,7 @@ p {
   min-height: 430px;
 
   display: flex;
+
   flex-direction: column;
 
   align-items: center;
@@ -716,7 +875,8 @@ p {
 
   padding: 40px;
 
-  border: 1px dashed #b9c0c9;
+  border:
+    1px dashed #b9c0c9;
 
   border-radius: 8px;
 
@@ -764,7 +924,8 @@ p {
 .three-level-grid {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 22px;
 
@@ -776,7 +937,8 @@ p {
 
   padding: 30px;
 
-  border: 1px solid #e0e4e8;
+  border:
+    1px solid #e0e4e8;
 
   border-radius: 8px;
 
@@ -789,6 +951,7 @@ p {
   margin-bottom: 26px;
 
   font-size: 0.75rem;
+
   font-weight: 750;
 
   letter-spacing: 0.12em;
@@ -822,7 +985,8 @@ p {
 .role-grid {
   display: grid;
 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns:
+    repeat(3, 1fr);
 
   gap: 48px;
 
@@ -830,7 +994,8 @@ p {
 }
 
 .role-grid > div {
-  border-top: 3px solid #171a22;
+  border-top:
+    3px solid #171a22;
 
   padding-top: 22px;
 }
@@ -863,7 +1028,8 @@ p {
 
   padding: 40px 0;
 
-  border-top: 1px solid #e1e4e8;
+  border-top:
+    1px solid #e1e4e8;
 }
 
 .site-footer .container {
@@ -885,6 +1051,7 @@ p {
 
 .site-footer a {
   font-size: 0.9rem;
+
   font-weight: 650;
 
   text-decoration: none;
@@ -892,7 +1059,7 @@ p {
 
 
 /* =========================================================
-   ACCESSIBILITY — REDUCED MOTION
+   REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -915,7 +1082,8 @@ p {
 @media (max-width: 950px) {
 
   .container {
-    width: min(100% - 48px, 1240px);
+    width:
+      min(100% - 48px, 1240px);
   }
 
 
@@ -955,19 +1123,40 @@ p {
   }
 
 
-  /* STATS */
+  /* CAREER STATS */
 
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, 1fr);
 
     row-gap: 34px;
+  }
+
+
+  /* PROGRAM SCALE */
+
+  .scale-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .scale-stat {
+    border-bottom:
+      1px solid #dfe3e8;
+  }
+
+  .scale-stat:nth-child(3) {
+    padding-left: 0;
+
+    border-left: none;
   }
 
 
   /* AT A GLANCE */
 
   .at-a-glance {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+      repeat(2, 1fr);
   }
 
 
@@ -1003,7 +1192,8 @@ p {
 @media (max-width: 600px) {
 
   .container {
-    width: calc(100% - 32px);
+    width:
+      calc(100% - 32px);
   }
 
 
@@ -1028,14 +1218,15 @@ p {
   }
 
 
-  /* STATS */
+  /* CAREER STATS */
 
   .stats-section {
     padding-top: 18px;
   }
 
   .stats-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns:
+      1fr 1fr;
 
     gap: 30px 16px;
   }
@@ -1057,6 +1248,7 @@ p {
 
   .logo-item {
     width: 135px;
+
     flex-basis: 135px;
 
     margin-right: 28px;
@@ -1064,11 +1256,12 @@ p {
 
   .logo-item img {
     max-width: 115px;
+
     max-height: 58px;
   }
 
 
-  /* CASE */
+  /* FEATURED CASE */
 
   .case-introduction {
     padding: 40px 0 65px;
@@ -1083,7 +1276,49 @@ p {
   }
 
 
-  /* GLANCE */
+  /* PROGRAM CONTEXT */
+
+  .program-scale {
+    margin-top: 52px;
+
+    padding-top: 40px;
+  }
+
+  .program-scale h3 {
+    font-size: 2.5rem;
+  }
+
+  .program-scale-intro {
+    font-size: 1.08rem;
+  }
+
+  .scale-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scale-stat,
+  .scale-stat + .scale-stat,
+  .scale-stat:nth-child(3) {
+    min-height: auto;
+
+    padding: 22px 0;
+
+    border-left: none;
+
+    border-bottom:
+      1px solid #dfe3e8;
+  }
+
+  .scale-number {
+    font-size: 2.5rem;
+  }
+
+
+  /* AT A GLANCE */
+
+  .work-scale {
+    margin-top: 55px;
+  }
 
   .at-a-glance {
     grid-template-columns: 1fr;
@@ -1095,7 +1330,8 @@ p {
   .case-contents {
     margin-top: 45px;
 
-    padding: 28px 22px 34px;
+    padding:
+      28px 22px 34px;
   }
 
   .contents-grid {
