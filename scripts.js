@@ -1,53 +1,122 @@
 (() => {
   const marquees = document.querySelectorAll('[data-logo-marquee]');
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const SPEED_PX_PER_SECOND = 75; // Same approximate pace as the Toronto SIGGRAPH 0.5px/frame scroller.
+  const TOUCH_RESUME_DELAY = 900;
+  const MOUSE_RESUME_DELAY = 600;
 
   marquees.forEach((marquee) => {
-    let resumeTimer = null;
+    const track = marquee.querySelector('.logo-marquee-track');
+    const firstGroup = track?.querySelector('.logo-marquee-group');
+    if (!track || !firstGroup) return;
+
+    let isMouseDown = false;
+    let isTouching = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let resumeAt = 0;
+    let lastTime = performance.now();
+    let loopWidth = 0;
+
+    const measure = () => {
+      loopWidth = firstGroup.getBoundingClientRect().width;
+      if (loopWidth > 0 && marquee.scrollLeft >= loopWidth) {
+        marquee.scrollLeft %= loopWidth;
+      }
+    };
 
     const pause = () => {
-      if (resumeTimer) window.clearTimeout(resumeTimer);
-      resumeTimer = null;
-      marquee.classList.add('is-paused');
+      resumeAt = Number.POSITIVE_INFINITY;
     };
 
-    const resume = (delay = 900) => {
-      if (resumeTimer) window.clearTimeout(resumeTimer);
-      resumeTimer = window.setTimeout(() => {
-        marquee.classList.remove('is-paused');
-        resumeTimer = null;
-      }, delay);
+    const resumeAfter = (delay) => {
+      resumeAt = performance.now() + delay;
     };
 
-    // Touch / pen: stop as soon as the user touches the strip, then resume
-    // smoothly after they lift their finger. Page scrolling remains available.
-    marquee.addEventListener('pointerdown', (event) => {
-      if (event.pointerType === 'touch' || event.pointerType === 'pen') pause();
-    }, { passive: true });
+    const normalize = () => {
+      if (!loopWidth) measure();
+      if (!loopWidth) return;
+      while (marquee.scrollLeft >= loopWidth) marquee.scrollLeft -= loopWidth;
+      while (marquee.scrollLeft < 0) marquee.scrollLeft += loopWidth;
+    };
 
-    marquee.addEventListener('pointerup', (event) => {
-      if (event.pointerType === 'touch' || event.pointerType === 'pen') resume(1400);
-    }, { passive: true });
+    const animate = (now) => {
+      const delta = Math.min(now - lastTime, 50);
+      lastTime = now;
 
-    marquee.addEventListener('pointercancel', () => resume(1400), { passive: true });
+      const canMove =
+        !document.hidden &&
+        !isMouseDown &&
+        !isTouching &&
+        now >= resumeAt;
 
-    // Desktop: pause while the cursor is over the logos, then continue.
-    marquee.addEventListener('mouseenter', () => {
-      if (finePointer.matches) pause();
+      if (canMove && loopWidth > 0) {
+        marquee.scrollLeft += SPEED_PX_PER_SECOND * (delta / 1000);
+        normalize();
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    // Desktop: auto-scroll continues while hovering. It pauses only when the
+    // user actively clicks/drags, matching the Toronto SIGGRAPH behavior.
+    marquee.addEventListener('mousedown', (event) => {
+      if (event.button !== 0) return;
+      isMouseDown = true;
+      pause();
+      marquee.classList.add('is-dragging');
+      startX = event.pageX;
+      startScrollLeft = marquee.scrollLeft;
     });
+
+    window.addEventListener('mousemove', (event) => {
+      if (!isMouseDown) return;
+      event.preventDefault();
+      const walk = (event.pageX - startX) * 1.5;
+      marquee.scrollLeft = startScrollLeft - walk;
+      normalize();
+    }, { passive: false });
+
+    const endMouseDrag = () => {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+      marquee.classList.remove('is-dragging');
+      resumeAfter(MOUSE_RESUME_DELAY);
+    };
+
+    window.addEventListener('mouseup', endMouseDrag);
     marquee.addEventListener('mouseleave', () => {
-      if (finePointer.matches) resume(350);
+      if (isMouseDown) endMouseDrag();
     });
 
-    // Also pause when tabbing into the area if future logo links are added.
-    marquee.addEventListener('focusin', pause);
-    marquee.addEventListener('focusout', () => resume(350));
-  });
+    // Mobile/tablet: touching the strip pauses it immediately. Native page
+    // scrolling remains available. Auto-scroll resumes shortly after release.
+    marquee.addEventListener('touchstart', () => {
+      isTouching = true;
+      pause();
+    }, { passive: true });
 
-  document.addEventListener('visibilitychange', () => {
-    marquees.forEach((marquee) => {
-      if (document.hidden) marquee.classList.add('is-paused');
-      else marquee.classList.remove('is-paused');
+    const endTouch = () => {
+      isTouching = false;
+      resumeAfter(TOUCH_RESUME_DELAY);
+    };
+
+    marquee.addEventListener('touchend', endTouch, { passive: true });
+    marquee.addEventListener('touchcancel', endTouch, { passive: true });
+
+    // Re-measure after images load and whenever the strip changes size.
+    track.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) img.addEventListener('load', measure, { once: true });
     });
+
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver(measure);
+      observer.observe(marquee);
+      observer.observe(firstGroup);
+    } else {
+      window.addEventListener('resize', measure);
+    }
+
+    measure();
+    requestAnimationFrame(animate);
   });
 })();

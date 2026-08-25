@@ -1,0 +1,90 @@
+RockPortfolio.com logo scroller fix
+Date: 2026-08-25
+
+WHAT CHANGED
+1. Moved the logo scroller on BOTH index.html and about.html so it sits immediately below the site navigation/header and before each page's hero content.
+
+   index.html order:
+   Navigation -> Logo Scroller -> Enterprise Journey Management hero
+
+   about.html order:
+   Navigation -> Logo Scroller -> About / Resume hero
+
+2. Replaced the previous CSS-transform marquee animation with the same core approach that proved reliable on torontosiggraph.org:
+   - Native horizontal scroll container
+   - JavaScript requestAnimationFrame() advances scrollLeft continuously
+   - Seamless repeated logo groups
+   - No dependency on CSS animation timing for movement
+
+3. Fixed two likely desktop causes from the previous RockPortfolio version:
+   - The old CSS explicitly disabled the marquee when the browser/Windows reported prefers-reduced-motion. This can make the strip appear completely static on one PC while moving on another.
+   - The old JavaScript paused the marquee merely when the desktop mouse hovered over it. The revised version does NOT pause on hover; it pauses only when the user actively clicks/drags or touches the scroller.
+
+4. Interaction behavior now mirrors the Toronto SIGGRAPH scroller:
+   - Desktop: auto-scrolls continuously.
+   - Desktop mouse drag: pauses while dragging, then resumes after ~600 ms.
+   - Mobile/tablet touch: pauses immediately on touch, then resumes ~900 ms after release.
+   - Vertical page scrolling remains available on touch devices.
+   - Scrolling pauses when the browser tab is not visible.
+
+5. Responsive behavior retained/refined in styles.css:
+   - Full desktop logo sizes and spacing.
+   - Smaller logo width/spacing at tablet and mobile breakpoints.
+   - Hidden scrollbars while retaining a real scrollable container.
+
+6. Normalized the supplied logo assets into browser-friendly filenames inside /images and updated BOTH HTML pages to use those files:
+   - logo-ontario-health.png
+   - logo-cibc.png
+   - logo-rbc.png
+   - logo-td.svg
+   - logo-scotiabank.png
+   - logo-telus.svg
+   - logo-bell.png
+   - logo-government-ontario.png
+   - logo-acm-siggraph.png
+
+   This also removes reliance on logo filenames that were referenced by the previous HTML but were not actually present in the attached ZIP.
+
+FILES MODIFIED
+- index.html
+- about.html
+- styles.css
+- scripts.js
+- images/ (normalized scroller logo assets added)
+
+FILES/STRUCTURE KEPT
+- RockPortfolio remains a simple GitHub Pages site.
+- styles.css remains the external stylesheet.
+- scripts.js remains the external JavaScript file.
+- Existing case-study images and page content remain in the same structure.
+- CNAME remains in place.
+
+LOCAL TEST INSTRUCTIONS
+1. Extract the ZIP.
+2. Open the extracted folder.
+3. For the simplest test, double-click index.html in Chrome and Edge.
+4. Confirm the logo strip is directly below the navigation and moves continuously without placing the mouse over it.
+5. Move the mouse over the strip: it should KEEP moving.
+6. Click and drag the logos horizontally: movement should pause while dragging and resume shortly afterward.
+7. Open about.html and confirm identical scroller placement/behavior.
+8. Resize the desktop browser narrow and wide to confirm responsive logo sizing.
+9. If you have your Galaxy Fold 6 available, test touch: touching the strip should pause it; after release it should resume after about 0.9 seconds.
+
+OPTIONAL MORE REALISTIC LOCAL TEST
+From the extracted site folder, run a small local web server if Python is installed:
+
+  python -m http.server 8000
+
+Then visit:
+  http://localhost:8000/index.html
+  http://localhost:8000/about.html
+
+NOTES
+- The new marquee intentionally does not shut itself off when Windows/browser reduced-motion is enabled, because that behavior is a likely reason the old RockPortfolio strip was static on the home desktop PC. It remains user-pausable through direct interaction.
+- scripts.js was syntax-checked with Node.
+- Both HTML pages were checked to confirm there is one scroller each, it is located between the header and main content, and all referenced local image files exist in the package.
+
+COLOR LOGO UPDATE — 2026-08-25
+- Removed the grayscale/opacity treatment from the logo scroller. Logos now display in full colour at all times.
+- Kept the existing scroller timing and pause/resume behavior unchanged.
+- Cleaned the CIBC and Scotiabank PNGs so the checkerboard background pixels are transparent. They should now sit cleanly on the page background in Chrome, Edge, and mobile browsers.
