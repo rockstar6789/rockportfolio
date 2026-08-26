@@ -332,6 +332,20 @@ a {
   letter-spacing: -0.055em;
   line-height: 0.95;
 }
+
+.case-title-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.case-title-logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  border-radius: 8px;
+}
 .case-kicker {
   margin: 20px 0 0;
   color: #0878d1;
@@ -825,6 +839,14 @@ blockquote {
   .case-title {
     font-size: 58px;
   }
+  .case-title-with-logo {
+    gap: 14px;
+  }
+  .case-title-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+  }
   .case-kicker {
     font-size: 23px;
   }
@@ -984,6 +1006,13 @@ blockquote {
   }
   .case-title {
     font-size: 50px;
+  }
+  .case-title-with-logo {
+    gap: 12px;
+  }
+  .case-title-logo {
+    width: 48px;
+    height: 48px;
   }
   .program-scale h3,
   .section-title {
