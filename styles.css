@@ -139,13 +139,22 @@ a {
 .experience-stats {
   padding: 38px 0 28px;
 }
+
+/* Four-column grids */
 .stats-grid,
-.scale-grid,
-.at-a-glance {
+.scale-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
 }
+
+/* Five-column My Work — At a Glance grid */
+.at-a-glance {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+}
+
 .stat {
   text-align: center;
 }
